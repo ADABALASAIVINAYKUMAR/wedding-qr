@@ -1,0 +1,2371 @@
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            #6b304f 0%,
+            #321527 30%,
+            #160912 65%,
+            #070308 100%
+        );
+
+    color: white;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+}
+
+
+
+/* ==================================================
+   LOADER
+================================================== */
+
+#loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #4b2038,
+            #0a0408 75%
+        );
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+}
+
+#loader.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loader-ring {
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,190,215,.25);
+
+    border-top-color:
+        #ffd6e6;
+
+    border-right-color:
+        rgba(255,160,200,.7);
+
+    animation:
+        loaderRotate
+        2.4s
+        linear
+        infinite;
+
+    box-shadow:
+        0 0 30px
+        rgba(255,100,170,.2),
+
+        inset 0 0 25px
+        rgba(255,130,180,.08);
+}
+
+.loader-ring::before {
+    content: "";
+
+    position: absolute;
+
+    width: 72px;
+    height: 72px;
+
+    margin: 14px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,210,225,.18);
+
+    animation:
+        loaderRotateReverse
+        4s
+        linear
+        infinite;
+}
+
+.loader-heart {
+    position: absolute;
+
+    top: 34px;
+
+    font-size: 29px;
+
+    color: #ffabc9;
+
+    animation:
+        heartbeat
+        1.8s
+        ease-in-out
+        infinite;
+
+    text-shadow:
+        0 0 20px
+        #ff75ad,
+
+        0 0 40px
+        rgba(255,70,150,.5);
+}
+
+#loader p {
+    margin-top: 28px;
+
+    font-size: 8px;
+
+    letter-spacing: 5px;
+
+    color: #c6a8b5;
+}
+
+
+
+/* ==================================================
+   BACKGROUND
+================================================== */
+
+.background {
+    position: fixed;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+.glow {
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    filter: blur(120px);
+
+    opacity: .13;
+
+    animation:
+        glowMove
+        20s
+        ease-in-out
+        infinite alternate;
+}
+
+.glow-one {
+    left: -280px;
+    top: -200px;
+
+    background: #ff4e94;
+}
+
+.glow-two {
+    right: -300px;
+    top: 30%;
+
+    background: #a45aff;
+
+    animation-delay: 5s;
+}
+
+.glow-three {
+    left: 30%;
+    bottom: -350px;
+
+    background: #ff719f;
+
+    animation-delay: 10s;
+}
+
+.ambient-light {
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,180,210,.12),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    animation:
+        ambientFloat
+        16s
+        ease-in-out
+        infinite alternate;
+}
+
+.light-one {
+    left: 20%;
+    top: 35%;
+}
+
+.light-two {
+    right: 18%;
+    top: 65%;
+
+    animation-delay: 6s;
+}
+
+@keyframes glowMove {
+    to {
+        transform:
+            translate3d(70px,-50px,0)
+            scale(1.18);
+    }
+}
+
+@keyframes ambientFloat {
+    to {
+        transform:
+            translate3d(80px,-50px,0)
+            scale(1.25);
+    }
+}
+
+
+
+/* ==================================================
+   PAGE
+================================================== */
+
+.page {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1100px, 100%);
+
+    margin: auto;
+
+    padding:
+        35px 25px
+        80px;
+
+    text-align: center;
+}
+
+
+
+/* ==================================================
+   TOP DECORATION
+================================================== */
+
+.top-decoration {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-bottom: 28px;
+
+    animation:
+        fadeDown
+        1.3s
+        cubic-bezier(.22,1,.36,1)
+        both;
+}
+
+.top-decoration i {
+    width: 70px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #e2a4bd
+        );
+}
+
+.top-decoration i:nth-of-type(2) {
+    background:
+        linear-gradient(
+            90deg,
+            #e2a4bd,
+            transparent
+        );
+}
+
+.top-decoration span {
+    color: #efb3cd;
+    font-size: 13px;
+
+    animation:
+        sparkle
+        3s
+        ease-in-out
+        infinite;
+}
+
+.top-decoration b {
+    color: #f2abc8;
+    font-size: 21px;
+
+    animation:
+        heartbeat
+        2.2s
+        ease-in-out
+        infinite;
+}
+
+
+
+/* ==================================================
+   HERO
+================================================== */
+
+.hero {
+    animation:
+        heroReveal
+        1.5s
+        cubic-bezier(.22,1,.36,1)
+        both;
+}
+
+.eyebrow {
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+    color: #cdaaba;
+
+    margin-bottom: 17px;
+}
+
+.hero h1 {
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(68px, 12vw, 125px);
+
+    font-weight: 500;
+
+    line-height: .78;
+
+    letter-spacing: -4px;
+}
+
+.hero h1 em {
+    display: block;
+
+    margin-top: 10px;
+
+    font-weight: 500;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #f0a6c6,
+            #ffffff,
+            #f3b4cf,
+            #ffffff
+        );
+
+    background-size: 300% auto;
+
+    color: transparent;
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    animation:
+        shimmer
+        8s
+        linear
+        infinite;
+}
+
+.title-line {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin:
+        30px 0 14px;
+}
+
+.title-line span {
+    width: 100px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #d99bb6
+        );
+}
+
+.title-line span:last-child {
+    background:
+        linear-gradient(
+            90deg,
+            #d99bb6,
+            transparent
+        );
+}
+
+.title-line b {
+    color: #f2a5c4;
+
+    animation:
+        heartbeat
+        2s
+        ease-in-out
+        infinite;
+}
+
+.subtitle {
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 19px;
+
+    font-style: italic;
+
+    color: #bfaab4;
+}
+
+
+
+/* ==================================================
+   VENUE
+================================================== */
+
+.venue-card {
+    position: relative;
+
+    max-width: 750px;
+
+    margin:
+        55px auto 90px;
+
+    padding:
+        38px 25px;
+
+    border-radius: 30px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,160,195,.11),
+            rgba(255,255,255,.025)
+        );
+
+    backdrop-filter:
+        blur(25px);
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,.42);
+
+    overflow: hidden;
+
+    animation:
+        cardReveal
+        1.4s
+        .25s
+        cubic-bezier(.22,1,.36,1)
+        both;
+}
+
+.venue-card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 1px;
+
+    border-radius: 29px;
+
+    border:
+        1px solid
+        rgba(255,210,225,.04);
+
+    pointer-events: none;
+}
+
+.venue-card::after {
+    content: "";
+
+    position: absolute;
+
+    top: -100%;
+    left: -60%;
+
+    width: 35%;
+    height: 300%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.08),
+            transparent
+        );
+
+    transform: rotate(25deg);
+
+    animation:
+        cardShine
+        9s
+        ease-in-out
+        infinite;
+}
+
+.venue-glow {
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    top: -150px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    background: #ff5d9b;
+
+    filter: blur(100px);
+
+    opacity: .17;
+}
+
+.venue-orb {
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #ffd6e6;
+
+    box-shadow:
+        0 0 15px
+        #ff9fc4;
+
+    left: 12%;
+
+    top: 28%;
+
+    animation:
+        orbFloat
+        6s
+        ease-in-out
+        infinite;
+}
+
+.location-icon {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,170,200,.09);
+
+    border:
+        1px solid
+        rgba(255,190,215,.25);
+
+    margin-bottom: 12px;
+
+    animation:
+        pinFloat
+        4s
+        ease-in-out
+        infinite;
+}
+
+.location-icon span {
+    font-size: 25px;
+
+    filter:
+        drop-shadow(
+            0 0 8px
+            rgba(255,120,170,.5)
+        );
+}
+
+.venue-label {
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    color: #d5afbe;
+}
+
+.venue-card h2 {
+    position: relative;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(38px, 6vw, 60px);
+
+    line-height: .9;
+
+    margin:
+        10px 0 17px;
+}
+
+.gold-line {
+    width: 90px;
+    height: 1px;
+
+    margin:
+        0 auto 17px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #edb4c9,
+            transparent
+        );
+
+    animation:
+        lineGlow
+        4s
+        ease-in-out
+        infinite;
+}
+
+.venue-name {
+    color: #e3d5db;
+
+    font-size: 13px;
+
+    margin-bottom: 7px;
+}
+
+.venue-place {
+    color: #c4a7b4;
+
+    font-size: 12px;
+
+    letter-spacing: .4px;
+}
+
+
+
+/* ==================================================
+   COUPLE
+================================================== */
+
+.couple-section {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 30px;
+
+    margin-bottom: 90px;
+}
+
+.photo-wrapper {
+    position: relative;
+
+    width: 260px;
+
+    flex-shrink: 1;
+
+    will-change: transform;
+}
+
+.photo-card {
+    position: relative;
+
+    padding: 5px;
+
+    overflow: hidden;
+
+    aspect-ratio: 4 / 5;
+
+    border-radius:
+        130px 130px 30px 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7c8d9,
+            #8a526d,
+            #f4afcb,
+            #5e354c
+        );
+
+    box-shadow:
+        0 35px 90px
+        rgba(0,0,0,.5);
+
+    transition:
+        transform
+        .8s
+        cubic-bezier(.22,1,.36,1);
+}
+
+.left-photo .photo-card {
+    transform: rotate(-4deg);
+}
+
+.right-photo .photo-card {
+    transform: rotate(4deg);
+}
+
+.photo-border {
+    position: absolute;
+
+    inset: 3px;
+
+    border-radius:
+        127px 127px 27px 27px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    z-index: 6;
+
+    pointer-events: none;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    border-radius:
+        125px 125px 25px 25px;
+
+    transition:
+        transform
+        1.2s
+        cubic-bezier(.22,1,.36,1);
+}
+
+.photo-card:hover {
+    transform:
+        rotate(0deg)
+        translateY(-12px)
+        scale(1.035);
+}
+
+.photo-card:hover img {
+    transform: scale(1.06);
+}
+
+.photo-shine {
+    position: absolute;
+
+    z-index: 5;
+
+    top: -30%;
+    left: -130%;
+
+    width: 60%;
+    height: 170%;
+
+    transform: rotate(17deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.26),
+            transparent
+        );
+
+    animation:
+        photoSweep
+        9s
+        ease-in-out
+        infinite;
+}
+
+.photo-heart {
+    position: absolute;
+
+    z-index: 10;
+
+    bottom: -14px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #190b13;
+
+    border:
+        1px solid
+        rgba(255,180,210,.45);
+
+    color: #f4a7c5;
+
+    animation:
+        heartbeat
+        2.3s
+        ease-in-out
+        infinite;
+}
+
+
+
+/* ==================================================
+   CENTER ANIMATION
+================================================== */
+
+.center-animation {
+    position: relative;
+
+    width: 250px;
+    height: 250px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    will-change: transform;
+
+    animation:
+        centerFloat
+        7s
+        ease-in-out
+        infinite;
+}
+
+.center-glow {
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,105,170,.35),
+            rgba(255,105,170,.08) 45%,
+            transparent 72%
+        );
+
+    filter: blur(10px);
+
+    animation:
+        glowPulse
+        5s
+        ease-in-out
+        infinite;
+}
+
+.glow-secondary {
+    width: 140px;
+    height: 140px;
+
+    opacity: .5;
+
+    animation-delay: 1.5s;
+
+    animation-duration: 6s;
+}
+
+
+
+/* ==================================================
+   ORBITS
+================================================== */
+
+.orbit-ring {
+    position: absolute;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,190,215,.28);
+
+    pointer-events: none;
+}
+
+.ring-outer {
+    width: 235px;
+    height: 235px;
+
+    border-top-color:
+        #f5abc8;
+
+    border-right-color:
+        transparent;
+
+    animation:
+        rotate
+        18s
+        linear
+        infinite;
+}
+
+.ring-middle {
+    width: 200px;
+    height: 200px;
+
+    border-bottom-color:
+        #f8d4e2;
+
+    border-left-color:
+        transparent;
+
+    animation:
+        rotateReverse
+        14s
+        linear
+        infinite;
+}
+
+.ring-inner {
+    width: 165px;
+    height: 165px;
+
+    border-top-color:
+        rgba(255,255,255,.55);
+
+    border-bottom-color:
+        transparent;
+
+    animation:
+        rotate
+        11s
+        linear
+        infinite;
+}
+
+
+
+/* ==================================================
+   WEDDING RINGS
+================================================== */
+
+.wedding-rings {
+    position: relative;
+
+    width: 155px;
+    height: 115px;
+
+    z-index: 5;
+}
+
+.gold-ring {
+    position: absolute;
+
+    width: 88px;
+    height: 88px;
+
+    border-radius: 50%;
+
+    border:
+        4px solid
+        #f2c2d4;
+
+    box-shadow:
+        inset 0 0 12px
+        rgba(255,255,255,.35),
+
+        0 0 18px
+        rgba(255,150,195,.5),
+
+        0 0 40px
+        rgba(255,120,180,.2);
+}
+
+.ring-left {
+    left: 3px;
+    top: 18px;
+
+    transform:
+        rotate(-12deg);
+
+    animation:
+        ringLeft
+        5s
+        ease-in-out
+        infinite;
+}
+
+.ring-right {
+    right: 3px;
+    top: 18px;
+
+    transform:
+        rotate(12deg);
+
+    animation:
+        ringRight
+        5s
+        ease-in-out
+        infinite;
+}
+
+.ring-shine {
+    position: absolute;
+
+    width: 17px;
+    height: 5px;
+
+    top: 9px;
+    left: 16px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    filter: blur(1px);
+
+    opacity: .8;
+
+    animation:
+        shinePulse
+        3s
+        ease-in-out
+        infinite;
+}
+
+
+
+/* ==================================================
+   DIAMOND
+================================================== */
+
+.diamond {
+    position: absolute;
+
+    z-index: 10;
+
+    top: 1px;
+    left: 67px;
+
+    width: 21px;
+    height: 21px;
+
+    transform:
+        rotate(45deg);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f6b4cf,
+            #ffffff
+        );
+
+    box-shadow:
+        0 0 12px white,
+        0 0 30px #ff9bc0;
+
+    animation:
+        diamondPulse
+        3.5s
+        ease-in-out
+        infinite;
+}
+
+.diamond span {
+    position: absolute;
+
+    inset: 5px;
+
+    background: white;
+
+    opacity: .7;
+
+    filter: blur(2px);
+}
+
+
+
+/* ==================================================
+   CENTRAL HEART
+================================================== */
+
+.big-heart {
+    position: absolute;
+
+    z-index: 20;
+
+    top: 126px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    color: #ff9fc4;
+
+    font-size: 34px;
+
+    text-shadow:
+        0 0 12px #ff6da4,
+        0 0 30px #ff6da4,
+        0 0 55px rgba(255,80,150,.7);
+
+    animation:
+        bigHeartbeat
+        2.2s
+        ease-in-out
+        infinite;
+}
+
+
+
+/* ==================================================
+   FLOATING HEARTS
+================================================== */
+
+.floating-heart {
+    position: absolute;
+
+    z-index: 15;
+
+    color: #ffc2d8;
+
+    text-shadow:
+        0 0 12px #ff7dac;
+
+    animation:
+        floatingHeart
+        5s
+        ease-in-out
+        infinite;
+}
+
+.heart-one {
+    top: 40px;
+    left: 25px;
+}
+
+.heart-two {
+    top: 50px;
+    right: 20px;
+
+    animation-delay: 1.7s;
+}
+
+.heart-three {
+    bottom: 35px;
+    right: 35px;
+
+    animation-delay: 3.2s;
+}
+
+
+
+/* ==================================================
+   SPARKLES
+================================================== */
+
+.spark {
+    position: absolute;
+
+    z-index: 25;
+
+    color: #ffeef5;
+
+    animation:
+        sparkle
+        3.5s
+        ease-in-out
+        infinite;
+}
+
+.spark-1 {
+    top: 24px;
+    left: 50px;
+}
+
+.spark-2 {
+    top: 30px;
+    right: 45px;
+
+    animation-delay: .7s;
+}
+
+.spark-3 {
+    left: 14px;
+    bottom: 65px;
+
+    animation-delay: 1.4s;
+}
+
+.spark-4 {
+    right: 10px;
+    bottom: 70px;
+
+    animation-delay: 2s;
+}
+
+.spark-5 {
+    left: 50%;
+    bottom: 8px;
+
+    animation-delay: 2.5s;
+}
+
+.spark-6 {
+    left: 45px;
+    top: 100px;
+
+    animation-delay: 3s;
+}
+
+.tiny-star {
+    position: absolute;
+
+    color: white;
+
+    animation:
+        sparkle
+        3s
+        ease-in-out
+        infinite;
+}
+
+.tiny-one {
+    top: 78px;
+    left: 8px;
+}
+
+.tiny-two {
+    bottom: 75px;
+    right: 6px;
+
+    animation-delay: 1.2s;
+}
+
+
+
+/* ==================================================
+   MESSAGE
+================================================== */
+
+.message {
+    margin-bottom: 90px;
+}
+
+.message-line {
+    width: 75px;
+    height: 1px;
+
+    margin:
+        0 auto 18px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #d79ab6,
+            transparent
+        );
+
+    animation:
+        lineGlow
+        4s
+        ease-in-out
+        infinite;
+}
+
+.message p {
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 30px;
+
+    color: #e9dce2;
+}
+
+.message p span {
+    color: #efa7c6;
+
+    font-style: italic;
+}
+
+.message small {
+    display: block;
+
+    margin-top: 10px;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+
+    color: #968690;
+}
+
+
+
+/* ==================================================
+   AMALAPURAM
+================================================== */
+
+.destination {
+    margin-bottom: 80px;
+}
+
+.destination-small {
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+    color: #bba0ae;
+}
+
+.destination h2 {
+    margin: 10px 0;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(65px, 13vw, 135px);
+
+    line-height: .82;
+
+    letter-spacing: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #efa6c5,
+            #ffffff,
+            #efa6c5,
+            #ffffff
+        );
+
+    background-size: 300% auto;
+
+    color: transparent;
+
+    background-clip: text;
+
+    -webkit-background-clip: text;
+
+    animation:
+        shimmer
+        9s
+        linear
+        infinite;
+}
+
+.destination-line {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin: 20px 0;
+}
+
+.destination-line span {
+    width: 90px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #d99bb7
+        );
+}
+
+.destination-line span:last-child {
+    background:
+        linear-gradient(
+            90deg,
+            #d99bb7,
+            transparent
+        );
+}
+
+.destination-line b {
+    color: #efa5c3;
+
+    animation:
+        heartbeat
+        2s
+        ease-in-out
+        infinite;
+}
+
+.destination > p:last-child {
+    color: #9e8f97;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 17px;
+
+    font-style: italic;
+}
+
+
+
+/* ==================================================
+   GOOGLE MAPS
+================================================== */
+
+.maps-section {
+    max-width: 680px;
+
+    margin:
+        0 auto 90px;
+}
+
+.maps-button {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    padding: 20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.17);
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,130,180,.17),
+            rgba(255,255,255,.04)
+        );
+
+    backdrop-filter:
+        blur(25px);
+
+    text-decoration: none;
+
+    color: white;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.4);
+
+    transition:
+        transform
+        .6s
+        cubic-bezier(.22,1,.36,1),
+
+        box-shadow
+        .6s ease,
+
+        border-color
+        .6s ease;
+}
+
+.maps-button::before {
+    content: "";
+
+    position: absolute;
+
+    top: -50%;
+    left: -120%;
+
+    width: 55%;
+    height: 200%;
+
+    transform: rotate(20deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.22),
+            transparent
+        );
+
+    animation:
+        mapSweep
+        8s
+        ease-in-out
+        infinite;
+}
+
+.maps-button:hover {
+    transform:
+        translateY(-7px)
+        scale(1.015);
+
+    border-color:
+        rgba(255,180,210,.5);
+
+    box-shadow:
+        0 40px 90px
+        rgba(255,80,150,.2);
+}
+
+.map-icon {
+    position: relative;
+
+    z-index: 2;
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    font-size: 25px;
+
+    transition:
+        transform
+        .5s
+        cubic-bezier(.22,1,.36,1);
+}
+
+.maps-button:hover .map-icon {
+    transform:
+        rotate(-5deg)
+        scale(1.08);
+}
+
+.map-text {
+    position: relative;
+
+    z-index: 2;
+
+    flex: 1;
+
+    text-align: left;
+}
+
+.map-text strong {
+    display: block;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+.map-text span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #bdaab4;
+
+    font-size: 10px;
+}
+
+.map-arrow {
+    position: relative;
+
+    z-index: 2;
+
+    color: #efa8c6;
+
+    font-size: 30px;
+
+    transition:
+        transform
+        .5s
+        cubic-bezier(.22,1,.36,1);
+}
+
+.maps-button:hover .map-arrow {
+    transform:
+        translateX(7px);
+}
+
+.maps-note {
+    margin-top: 12px;
+
+    font-size: 9px;
+
+    color: #8e8088;
+}
+
+
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+footer {
+    padding-bottom: 20px;
+}
+
+.footer-line {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+.footer-line span {
+    width: 65px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #d598b4
+        );
+}
+
+.footer-line span:last-child {
+    background:
+        linear-gradient(
+            90deg,
+            #d598b4,
+            transparent
+        );
+}
+
+.footer-line b {
+    color: #eca4c2;
+
+    animation:
+        heartbeat
+        2.5s
+        ease-in-out
+        infinite;
+}
+
+footer p {
+    font-size: 8px;
+
+    letter-spacing: 4px;
+
+    color: #9a8b94;
+}
+
+.footer-hearts {
+    margin: 18px 0;
+
+    color: #e9a3c1;
+
+    letter-spacing: 7px;
+
+    animation:
+        footerFloat
+        4s
+        ease-in-out
+        infinite;
+}
+
+
+
+/* ==================================================
+   PARTICLES
+================================================== */
+
+.particle {
+    position: fixed;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    animation:
+        particleFall
+        linear
+        forwards;
+
+    will-change:
+        transform,
+        opacity;
+}
+
+.star-particle {
+    color:
+        rgba(255,235,245,.7);
+
+    text-shadow:
+        0 0 12px
+        rgba(255,160,205,.8);
+}
+
+.heart-particle {
+    color:
+        rgba(255,165,201,.42);
+
+    text-shadow:
+        0 0 12px
+        rgba(255,100,170,.5);
+}
+
+.flower-particle {
+    color:
+        rgba(255,200,220,.4);
+}
+
+@keyframes particleFall {
+    0% {
+        transform:
+            translate3d(0,-30px,0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .65;
+    }
+
+    85% {
+        opacity: .45;
+    }
+
+    100% {
+        transform:
+            translate3d(
+                var(--drift),
+                110vh,
+                0
+            )
+            rotate(240deg);
+
+        opacity: 0;
+    }
+}
+
+
+
+/* ==================================================
+   ANIMATIONS
+================================================== */
+
+@keyframes shimmer {
+    to {
+        background-position:
+            300% center;
+    }
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.16);
+    }
+}
+
+@keyframes bigHeartbeat {
+    0%,100% {
+        transform:
+            translateX(-50%)
+            scale(1);
+    }
+
+    18% {
+        transform:
+            translateX(-50%)
+            scale(1.18);
+    }
+
+    32% {
+        transform:
+            translateX(-50%)
+            scale(1);
+    }
+
+    48% {
+        transform:
+            translateX(-50%)
+            scale(1.1);
+    }
+}
+
+@keyframes centerFloat {
+    0%,100% {
+        transform:
+            translate3d(0,0,0);
+    }
+
+    50% {
+        transform:
+            translate3d(0,-8px,0);
+    }
+}
+
+@keyframes glowPulse {
+    0%,100% {
+        transform: scale(.85);
+        opacity: .45;
+    }
+
+    50% {
+        transform: scale(1.12);
+        opacity: .9;
+    }
+}
+
+@keyframes rotate {
+    to {
+        transform:
+            rotate(360deg);
+    }
+}
+
+@keyframes rotateReverse {
+    to {
+        transform:
+            rotate(-360deg);
+    }
+}
+
+@keyframes ringLeft {
+    0%,100% {
+        transform:
+            rotate(-12deg)
+            translate3d(0,0,0);
+    }
+
+    50% {
+        transform:
+            rotate(-7deg)
+            translate3d(5px,-3px,0);
+    }
+}
+
+@keyframes ringRight {
+    0%,100% {
+        transform:
+            rotate(12deg)
+            translate3d(0,0,0);
+    }
+
+    50% {
+        transform:
+            rotate(7deg)
+            translate3d(-5px,-3px,0);
+    }
+}
+
+@keyframes diamondPulse {
+    0%,100% {
+        transform:
+            rotate(45deg)
+            scale(.82);
+
+        opacity: .7;
+    }
+
+    50% {
+        transform:
+            rotate(45deg)
+            scale(1.15);
+
+        opacity: 1;
+    }
+}
+
+@keyframes floatingHeart {
+    0%,100% {
+        transform:
+            translate3d(0,0,0)
+            scale(.8);
+
+        opacity: .3;
+    }
+
+    50% {
+        transform:
+            translate3d(0,-10px,0)
+            scale(1.05);
+
+        opacity: .9;
+    }
+}
+
+@keyframes sparkle {
+    0%,100% {
+        opacity: .15;
+
+        transform:
+            scale(.7)
+            rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            scale(1.25)
+            rotate(70deg);
+    }
+}
+
+@keyframes pinFloat {
+    0%,100% {
+        transform:
+            translate3d(0,0,0);
+    }
+
+    50% {
+        transform:
+            translate3d(0,-5px,0);
+    }
+}
+
+@keyframes photoSweep {
+    0%,25% {
+        left: -130%;
+    }
+
+    55%,100% {
+        left: 150%;
+    }
+}
+
+@keyframes cardShine {
+    0%,30% {
+        left: -100%;
+    }
+
+    60%,100% {
+        left: 150%;
+    }
+}
+
+@keyframes mapSweep {
+    0%,30% {
+        left: -110%;
+    }
+
+    60%,100% {
+        left: 150%;
+    }
+}
+
+@keyframes heroReveal {
+    from {
+        opacity: 0;
+
+        transform:
+            translate3d(0,35px,0)
+            scale(.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate3d(0,0,0)
+            scale(1);
+    }
+}
+
+@keyframes cardReveal {
+    from {
+        opacity: 0;
+
+        transform:
+            translate3d(0,40px,0)
+            scale(.96);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate3d(0,0,0)
+            scale(1);
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+
+        transform:
+            translate3d(0,-20px,0);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate3d(0,0,0);
+    }
+}
+
+@keyframes loaderRotate {
+    to {
+        transform:
+            rotate(360deg);
+    }
+}
+
+@keyframes loaderRotateReverse {
+    to {
+        transform:
+            rotate(-360deg);
+    }
+}
+
+@keyframes orbFloat {
+    0%,100% {
+        transform:
+            translate3d(0,0,0);
+
+        opacity: .25;
+    }
+
+    50% {
+        transform:
+            translate3d(30px,-20px,0);
+
+        opacity: .8;
+    }
+}
+
+@keyframes lineGlow {
+    0%,100% {
+        opacity: .5;
+        transform: scaleX(.85);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleX(1.05);
+    }
+}
+
+@keyframes shinePulse {
+    0%,100% {
+        opacity: .4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes footerFloat {
+    0%,100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-4px);
+    }
+}
+
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 800px) {
+
+    .page {
+        padding:
+            30px 14px
+            60px;
+    }
+
+    .couple-section {
+        gap: 8px;
+    }
+
+    .photo-wrapper {
+        width: 145px;
+    }
+
+    .center-animation {
+        width: 170px;
+        height: 220px;
+    }
+
+    .ring-outer {
+        width: 170px;
+        height: 170px;
+    }
+
+    .ring-middle {
+        width: 145px;
+        height: 145px;
+    }
+
+    .ring-inner {
+        width: 120px;
+        height: 120px;
+    }
+
+    .wedding-rings {
+        transform: scale(.72);
+    }
+
+    .big-heart {
+        top: 112px;
+        font-size: 28px;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .page {
+        padding:
+            25px 10px
+            55px;
+    }
+
+    .top-decoration {
+        gap: 9px;
+    }
+
+    .top-decoration i {
+        width: 45px;
+    }
+
+    .hero h1 {
+        font-size: 68px;
+    }
+
+    .venue-card {
+        margin-top: 45px;
+
+        padding:
+            32px 17px;
+    }
+
+    .venue-card h2 {
+        font-size: 36px;
+    }
+
+    .couple-section {
+        gap: 0;
+    }
+
+    .photo-wrapper {
+        width: 105px;
+    }
+
+    .center-animation {
+        width: 115px;
+        height: 190px;
+    }
+
+    .ring-outer {
+        width: 115px;
+        height: 115px;
+    }
+
+    .ring-middle {
+        width: 100px;
+        height: 100px;
+    }
+
+    .ring-inner {
+        width: 82px;
+        height: 82px;
+    }
+
+    .center-glow {
+        width: 105px;
+        height: 105px;
+    }
+
+    .wedding-rings {
+        transform: scale(.52);
+    }
+
+    .big-heart {
+        top: 97px;
+        font-size: 22px;
+    }
+
+    .spark {
+        font-size: 8px;
+    }
+
+    .floating-heart {
+        font-size: 10px;
+    }
+
+    .destination h2 {
+        font-size: 58px;
+        letter-spacing: 2px;
+    }
+
+    .destination > p:last-child {
+        padding: 0 15px;
+    }
+
+    .maps-button {
+        padding: 15px;
+    }
+
+    .map-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .map-text strong {
+        font-size: 9px;
+    }
+
+    .map-text span {
+        font-size: 8px;
+    }
+
+    .map-arrow {
+        font-size: 24px;
+    }
+
+    footer p {
+        font-size: 7px;
+        letter-spacing: 3px;
+    }
+}
+
+
+
+/* ==================================================
+   REDUCE MOTION
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+} 
